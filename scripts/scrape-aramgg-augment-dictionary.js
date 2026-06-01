@@ -10,6 +10,10 @@ function normalizeText(text = "") {
   return text.replace(/\s+/g, " ").trim();
 }
 
+function compactText(text = "") {
+  return normalizeText(text).replace(/\s+/g, "");
+}
+
 function absoluteUrl(url) {
   if (!url) return "";
   if (url.startsWith("http://") || url.startsWith("https://")) return url;
@@ -44,7 +48,7 @@ async function fetchText(url) {
   const response = await fetch(url, {
     headers: {
       "user-agent":
-        "Mozilla/5.0 (compatible; personal-aramgg-augment-dictionary/1.0; +https://github.com/)",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/125 Safari/537.36",
       "accept-language": "zh-CN,zh;q=0.9,en;q=0.8",
     },
   });
@@ -56,10 +60,13 @@ async function fetchText(url) {
   return await response.text();
 }
 
-function findBestImage($, el, augmentName) {
+function findPossibleImage($, el, augmentName) {
+  // aramgg /augments currently mostly exposes recommended champion icons,
+  // not augment icons. This function keeps a safe image field only when a
+  // nearby image alt matches the augment name or URL looks augment-like.
   const candidates = [];
 
-  function collectFrom(node, weight = 0) {
+  function collect(node, weight = 0) {
     const $node = $(node);
 
     $node.find("img").each((_, img) => {
@@ -77,62 +84,57 @@ function findBestImage($, el, augmentName) {
       let score = weight;
 
       if (alt === augmentName) score += 100;
-      if (fullSrc.toLowerCase().includes("augment")) score += 50;
-      if (fullSrc.toLowerCase().includes("arena")) score += 20;
-      if (fullSrc.toLowerCase().includes("champion")) score -= 40;
-      if (alt && alt !== augmentName) score -= 15;
+      if (/augment|augments|perk|arena/i.test(fullSrc)) score += 60;
+      if (alt && alt !== augmentName) score -= 80; // usually champion icons
 
-      candidates.push({
-        src: fullSrc,
-        alt,
-        score,
-      });
+      candidates.push({ src: fullSrc, alt, score });
     });
 
     const styleUrl = extractUrlFromStyle($node.attr("style") || "");
     if (styleUrl) {
-      candidates.push({
-        src: styleUrl,
-        alt: "",
-        score: weight + (styleUrl.toLowerCase().includes("augment") ? 50 : 0),
-      });
+      let score = weight;
+      if (/augment|augments|perk|arena/i.test(styleUrl)) score += 60;
+      candidates.push({ src: styleUrl, alt: "", score });
     }
   }
 
-  collectFrom(el, 30);
-
+  collect(el, 30);
   let parent = $(el).parent();
-  for (let depth = 0; depth < 4 && parent.length; depth++) {
-    collectFrom(parent, 20 - depth * 5);
+  for (let depth = 0; depth < 3 && parent.length; depth++) {
+    collect(parent, 20 - depth * 5);
     parent = parent.parent();
   }
 
   candidates.sort((a, b) => b.score - a.score);
-  return candidates[0]?.src || "";
+  const best = candidates[0];
+
+  if (!best || best.score < 50) return "";
+  return best.src;
 }
 
-function parseAugmentsFromAnchors(html) {
-  const $ = cheerio.load(html);
-  const byId = {};
-  const list = [];
+function parseFromAnchorTexts($) {
+  const byName = new Map();
 
-  $("a").each((_, el) => {
-    const text = normalizeText($(el).text());
+  $("a, button, div, li").each((_, el) => {
+    const raw = normalizeText($(el).text());
+    const compact = raw.replace(/\s+/g, "");
 
-    // Examples:
+    // This handles both:
     // 质变：棱彩阶 黄金 64.38% 选取率 1.47%
-    // 珠光护手 棱彩 60.59% 选取率 1.38%
-    const match = text.match(/^(.+?)\s+(棱彩|黄金|白银)\s+([\d.]+%)\s+选取率\s+([\d.]+%)$/);
+    // 质变：棱彩阶黄金64.38%选取率1.47%
+    const match = compact.match(/^(.+?)(棱彩|黄金|白银)([\d.]+%)选取率([\d.]+%)$/);
     if (!match) return;
 
     const [, name, rarity, winRate, pickRate] = match;
+    if (!name || name.length > 40) return;
+
     const href = absoluteUrl($(el).attr("href") || "");
-    const image = findBestImage($, el, name);
+    const image = findPossibleImage($, el, name);
     const augmentId = extractNumericId(href, image) || slugifyName(name);
 
-    if (!augmentId || byId[augmentId]) return;
+    if (byName.has(name)) return;
 
-    const item = {
+    byName.set(name, {
       augmentId,
       name,
       rarity,
@@ -142,117 +144,95 @@ function parseAugmentsFromAnchors(html) {
       image,
       imageFound: Boolean(image),
       idConfidence: /^\d+$/.test(augmentId) ? "numeric" : "name-slug",
-    };
-
-    byId[augmentId] = item;
-    list.push(item);
+      parseSource: "element-text",
+    });
   });
 
-  return { list, byId };
+  return [...byName.values()];
 }
 
-function parsePossibleJsonData(html) {
-  // Optional backup parser: scan script JSON for objects that may contain augment info.
-  // It won't break if the site changes; it just adds extra candidates when available.
-  const $ = cheerio.load(html);
-  const found = [];
+function parseFromBodyText($) {
+  const body = normalizeText($("body").text());
+  const results = [];
+  const seen = new Set();
 
-  function walk(value) {
-    if (!value || typeof value !== "object") return;
+  // Work section by section. Each augment row is followed by 5 champion names,
+  // so we avoid a giant greedy regex by slicing between rarity/rate patterns.
+  const pattern = /([\p{Script=Han}A-Za-z0-9：:！!、·.\-+（）() ]{1,40}?)(棱彩|黄金|白银)\s*([\d.]+%)\s*选取率\s*([\d.]+%)/gu;
 
-    if (Array.isArray(value)) {
-      for (const item of value) walk(item);
-      return;
-    }
+  let match;
+  while ((match = pattern.exec(body))) {
+    let name = normalizeText(match[1]);
 
-    const keys = Object.keys(value);
-    const name =
-      value.name ||
-      value.name_zh ||
-      value.nameZh ||
-      value.title ||
-      value.displayName ||
-      "";
+    // Remove tier headers if they get attached.
+    name = name.replace(/^.*?(T\s*\d\s*T\d\s*\d+个\s*(收起|展开)?\s*)/, "").trim();
 
-    const id =
-      value.augmentId ||
-      value.id ||
-      value.key ||
-      value.apiName ||
-      value.slug ||
-      "";
+    if (!name || name.length > 30) continue;
+    if (seen.has(name)) continue;
 
-    const image =
-      value.image ||
-      value.icon ||
-      value.iconUrl ||
-      value.imageUrl ||
-      value.src ||
-      "";
-
-    if (name && (id || image) && keys.some((key) => /augment|rarity|tier|win|pick|icon|image/i.test(key))) {
-      found.push({
-        augmentId: extractNumericId(id, image) || String(id || slugifyName(name)),
-        name: String(name),
-        image: absoluteUrl(String(image || "")),
-        rawId: id,
-      });
-    }
-
-    for (const child of Object.values(value)) walk(child);
+    seen.add(name);
+    results.push({
+      augmentId: slugifyName(name),
+      name,
+      rarity: match[2],
+      winRate: match[3],
+      pickRate: match[4],
+      href: "",
+      image: "",
+      imageFound: false,
+      idConfidence: "name-slug",
+      parseSource: "body-text",
+    });
   }
 
-  $("script").each((_, script) => {
-    const text = $(script).contents().text().trim();
-    if (!text || (!text.startsWith("{") && !text.startsWith("["))) return;
+  return results;
+}
 
-    try {
-      walk(JSON.parse(text));
-    } catch {
-      // ignore non-json scripts
+function mergeAugments(primary, fallback) {
+  const byName = new Map();
+
+  for (const item of [...primary, ...fallback]) {
+    if (!item.name) continue;
+
+    if (!byName.has(item.name)) {
+      byName.set(item.name, item);
+      continue;
     }
-  });
 
-  return found;
+    const old = byName.get(item.name);
+    byName.set(item.name, {
+      ...old,
+      ...Object.fromEntries(Object.entries(item).filter(([, value]) => value !== "" && value !== false)),
+      image: old.image || item.image || "",
+      imageFound: Boolean(old.image || item.image),
+      href: old.href || item.href || "",
+      augmentId: /^\d+$/.test(old.augmentId) ? old.augmentId : item.augmentId || old.augmentId,
+      idConfidence: /^\d+$/.test(old.augmentId) ? old.idConfidence : item.idConfidence || old.idConfidence,
+    });
+  }
+
+  return [...byName.values()];
 }
 
 async function main() {
   console.log(`Fetching ${AUGMENTS_URL}`);
   const html = await fetchText(AUGMENTS_URL);
+  const $ = cheerio.load(html);
 
-  const fromAnchors = parseAugmentsFromAnchors(html);
-  const fromJson = parsePossibleJsonData(html);
+  const fromElements = parseFromAnchorTexts($);
+  const fromBody = parseFromBodyText($);
+  const augments = mergeAugments(fromElements, fromBody).sort((a, b) => {
+    const order = { 棱彩: 0, 黄金: 1, 白银: 2 };
+    const rarityDiff = (order[a.rarity] ?? 99) - (order[b.rarity] ?? 99);
+    if (rarityDiff !== 0) return rarityDiff;
 
-  const byId = { ...fromAnchors.byId };
-
-  for (const item of fromJson) {
-    if (!item.augmentId) continue;
-
-    if (!byId[item.augmentId]) {
-      byId[item.augmentId] = {
-        augmentId: item.augmentId,
-        name: item.name,
-        rarity: "",
-        winRate: "",
-        pickRate: "",
-        href: "",
-        image: item.image,
-        imageFound: Boolean(item.image),
-        idConfidence: /^\d+$/.test(item.augmentId) ? "numeric-json" : "json",
-      };
-    } else if (!byId[item.augmentId].image && item.image) {
-      byId[item.augmentId].image = item.image;
-      byId[item.augmentId].imageFound = true;
-    }
-  }
-
-  const augments = Object.values(byId).sort((a, b) => {
-    const aNum = Number(a.augmentId);
-    const bNum = Number(b.augmentId);
-
-    if (Number.isFinite(aNum) && Number.isFinite(bNum)) return aNum - bNum;
-    return a.name.localeCompare(b.name, "zh-Hans-CN");
+    const aWin = Number(String(a.winRate).replace("%", ""));
+    const bWin = Number(String(b.winRate).replace("%", ""));
+    return bWin - aWin;
   });
+
+  const byId = Object.fromEntries(augments.map((item) => [item.augmentId, item]));
+  const byName = Object.fromEntries(augments.map((item) => [item.name, item]));
 
   const payload = {
     source: AUGMENTS_URL,
@@ -260,10 +240,14 @@ async function main() {
     augmentCount: augments.length,
     imageCount: augments.filter((item) => item.imageFound).length,
     note:
-      "This file is a one-time personal snapshot from aramgg augment ranking page. Some images may be empty if the page does not expose augment icons directly.",
+      "This is a one-time personal snapshot from aramgg augment ranking page. The page exposes augment names/rates, but it may not expose augment icons; if imageCount is 0, icons need another source later.",
+    debug: {
+      fromElements: fromElements.length,
+      fromBody: fromBody.length,
+    },
     augments,
     byId,
-    byName: Object.fromEntries(augments.map((item) => [item.name, item])),
+    byName,
   };
 
   await mkdir(path.dirname(OUT_PATH), { recursive: true });
@@ -272,6 +256,12 @@ async function main() {
   console.log(`Saved ${OUT_PATH}`);
   console.log(`Augments: ${payload.augmentCount}`);
   console.log(`Images found: ${payload.imageCount}`);
+  console.log(`Parsed from elements: ${fromElements.length}`);
+  console.log(`Parsed from body: ${fromBody.length}`);
+
+  if (payload.augmentCount === 0) {
+    throw new Error("No augments parsed. aramgg page structure may have changed.");
+  }
 }
 
 main().catch((error) => {
