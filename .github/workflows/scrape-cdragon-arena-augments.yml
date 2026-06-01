@@ -1,0 +1,34 @@
+name: Scrape CommunityDragon arena augments once
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-cdragon-arena-augments:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Scrape CommunityDragon arena augments and icons
+        run: node scripts/scrape-cdragon-arena-augments.js
+
+      - name: Commit generated CommunityDragon augment data
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add data/cdragon-arena-augments.json
+          git commit -m "Add CommunityDragon arena augment metadata snapshot" || echo "No changes to commit"
+          git push
