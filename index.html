@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>英雄联盟 7级 / 10级成就记录器</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: #020617;
+    }
+    .card-animate {
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card-animate:hover {
+      transform: translateY(-4px);
+    }
+    .image-zoom {
+      transition: transform 0.5s ease;
+    }
+    .card-animate:hover .image-zoom {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useEffect, useMemo, useState } = React;
+
+    const STORAGE_KEY = "lol-mastery-level-tracker-v2";
+    const OLD_STORAGE_KEY = "lol-mastery-10-tracker-v1";
+    const FALLBACK_VERSION = "16.11.1";
+    const LANG = "zh_CN";
+
+    const ROLE_LABELS = {
+      Fighter: "战士",
+      Tank: "坦克",
+      Mage: "法师",
+      Assassin: "刺客",
+      Marksman: "射手",
+      Support: "辅助",
+    };
+
+    const ICONS = {
+      search: "🔍",
+      trophy: "🏆",
+      medal: "🎖️",
+      circle: "○",
+      check: "✅",
+      sparkles: "✨",
+      download: "⬇️",
+      upload: "⬆️",
+      reset: "↺",
+    };
+
+    function classNames(...items) {
+      return items.filter(Boolean).join(" ");
+    }
+
+    function getRoleLabels(tags = []) {
+      return tags.map((tag) => ROLE_LABELS[tag] || tag);
+    }
+
+    function readInitialMasteryLevels() {
+      try {
+        const raw = window.localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          return parsed && typeof parsed === "object" ? parsed : {};
+        }
+
+        const oldRaw = window.localStorage.getItem(OLD_STORAGE_KEY);
+        if (oldRaw) {
+          const oldCompleted = JSON.parse(oldRaw);
+          return Array.isArray(oldCompleted)
+            ? Object.fromEntries(oldCompleted.map((id) => [id, 10]))
+            : {};
+        }
+
+        return {};
+      } catch {
+        return {};
+      }
+    }
+
+    function LolMasteryTracker() {
+      const [champions, setChampions] = useState([]);
+      const [version, setVersion] = useState(FALLBACK_VERSION);
+      const [loading, setLoading] = useState(true);
+      const [query, setQuery] = useState("");
+      const [filter, setFilter] = useState("all");
+      const [importText, setImportText] = useState("");
+      const [aramData, setAramData] = useState(null);
+      const [aramLoadError, setAramLoadError] = useState("");
+      const [selectedChampion, setSelectedChampion] = useState(null);
+      const [masteryLevels, setMasteryLevels] = useState(readInitialMasteryLevels);
+
+      useEffect(() => {
+        let cancelled = false;
+
+        async function loadChampions() {
+          setLoading(true);
+          try {
+            const versionsRes = await fetch("https://ddragon.leagueoflegends.com/api/versions.json");
+            const versions = await versionsRes.json();
+            const latest = versions?.[0] || FALLBACK_VERSION;
+
+            const champRes = await fetch(
+              `https://ddragon.leagueoflegends.com/cdn/${latest}/data/${LANG}/champion.json`
+            );
+            const champData = await champRes.json();
+            const list = Object.values(champData.data || {}).sort((a, b) =>
+              a.name.localeCompare(b.name, "zh-Hans-CN")
+            );
+
+            if (!cancelled) {
+              setVersion(latest);
+              setChampions(list);
+            }
+          } catch {
+            try {
+              const champRes = await fetch(
+                `https://ddragon.leagueoflegends.com/cdn/${FALLBACK_VERSION}/data/en_US/champion.json`
+              );
+              const champData = await champRes.json();
+              const list = Object.values(champData.data || {}).sort((a, b) =>
+                a.name.localeCompare(b.name)
+              );
+              if (!cancelled) setChampions(list);
+            } catch {
+              if (!cancelled) setChampions([]);
+            }
+          } finally {
+            if (!cancelled) setLoading(false);
+          }
+        }
+
+        loadChampions();
+
+        return () => {
+          cancelled = true;
+        };
+      }, []);
+
+      useEffect(() => {
+        try {
+          window.localStorage.setItem(STORAGE_KEY, JSON.stringify(masteryLevels));
+        } catch {}
+      }, [masteryLevels]);
+
+      useEffect(() => {
+        fetch("data/aramgg-augments.json", { cache: "no-store" })
+          .then((response) => {
+            if (!response.ok) throw new Error("No aramgg data");
+            return response.json();
+          })
+          .then((data) => {
+            setAramData(data);
+            setAramLoadError("");
+          })
+          .catch(() => {
+            setAramLoadError("还没有加载到 aramgg 海克斯数据。上传到 GitHub 后，先运行一次 GitHub Actions 爬虫生成 data/aramgg-augments.json。");
+          });
+      }, []);
+
+      const selectedAram = useMemo(() => {
+        if (!selectedChampion || !aramData) return null;
+        return aramData.champions?.[selectedChampion.key] || aramData[selectedChampion.key] || null;
+      }, [selectedChampion, aramData]);
+
+      const stats = useMemo(() => {
+        const total = champions.length;
+        const level10 = champions.filter((champion) => masteryLevels[champion.id] === 10).length;
+        const level7Only = champions.filter((champion) => masteryLevels[champion.id] === 7).length;
+        const level7Plus = champions.filter((champion) => (masteryLevels[champion.id] || 0) >= 7).length;
+        const tracked = level7Plus;
+        const percent = total ? Math.round((level10 / total) * 100) : 0;
+
+        return {
+          total,
+          level10,
+          level7Only,
+          level7Plus,
+          tracked,
+          left: Math.max(total - tracked, 0),
+          percent,
+        };
+      }, [champions, masteryLevels]);
+
+      const filteredChampions = useMemo(() => {
+        const keyword = query.trim().toLowerCase();
+
+        return champions
+          .filter((champion) => {
+            const level = masteryLevels[champion.id] || 0;
+            const roleLabels = getRoleLabels(champion.tags);
+
+            const matchesFilter =
+              filter === "all" ||
+              (filter === "level10" && level === 10) ||
+              (filter === "level7" && level === 7) ||
+              (filter === "level7Plus" && level >= 7) ||
+              (filter === "todo" && level === 0);
+
+            const matchesQuery =
+              !keyword ||
+              champion.name?.toLowerCase().includes(keyword) ||
+              champion.id?.toLowerCase().includes(keyword) ||
+              champion.title?.toLowerCase().includes(keyword) ||
+              roleLabels.some((role) => role.toLowerCase().includes(keyword));
+
+            return matchesFilter && matchesQuery;
+          })
+          .sort((a, b) => {
+            const aLevel = masteryLevels[a.id] || 0;
+            const bLevel = masteryLevels[b.id] || 0;
+
+            if (aLevel !== bLevel) return bLevel - aLevel;
+            return a.name.localeCompare(b.name, "zh-Hans-CN");
+          });
+      }, [champions, masteryLevels, query, filter]);
+
+      function setChampionLevel(id, level) {
+        setMasteryLevels((prev) => {
+          const next = { ...prev };
+          if (level === 0) {
+            delete next[id];
+          } else {
+            next[id] = level;
+          }
+          return next;
+        });
+      }
+
+      function clearAll() {
+        const ok = window.confirm("确定要清空所有记录吗？这个操作不能撤销。");
+        if (ok) setMasteryLevels({});
+      }
+
+      function exportData() {
+        const payload = {
+          app: "LoL Mastery Level Tracker",
+          version: 2,
+          exportedAt: new Date().toISOString(),
+          masteryLevels,
+        };
+
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "lol-mastery-level-record.json";
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function applyImportedPayload(payload) {
+        if (payload.masteryLevels && typeof payload.masteryLevels === "object") {
+          setMasteryLevels(payload.masteryLevels);
+          return true;
+        }
+
+        if (Array.isArray(payload.completed)) {
+          setMasteryLevels(Object.fromEntries(payload.completed.map((id) => [id, 10])));
+          return true;
+        }
+
+        return false;
+      }
+
+      function importFromText() {
+        try {
+          const text = importText.trim();
+          if (!text) {
+            alert("请先粘贴 Canvas 里显示的备份文本。");
+            return;
+          }
+
+          const payload = JSON.parse(text);
+          const ok = applyImportedPayload(payload);
+
+          if (!ok) {
+            alert("导入失败：这段文本不是有效的成就记录格式。");
+            return;
+          }
+
+          alert("导入成功！");
+          setImportText("");
+        } catch {
+          alert("导入失败：文本不是正确的 JSON。请确认从第一个 { 复制到最后一个 }。");
+        }
+      }
+
+      function importData(event) {
+        const file = event.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            const payload = JSON.parse(String(reader.result));
+
+            const ok = applyImportedPayload(payload);
+            if (!ok) {
+              alert("导入失败：文件不是有效的成就记录格式。");
+            }
+          } catch {
+            alert("导入失败：文件格式不正确。");
+          } finally {
+            event.target.value = "";
+          }
+        };
+        reader.readAsText(file);
+      }
+
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-slate-100">
+          <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+            <div className="mb-8 overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 p-6 shadow-2xl backdrop-blur">
+              <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                <div>
+                  <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-sm text-amber-200">
+                    <span>{ICONS.sparkles}</span>
+                    英雄联盟 7级 / 10级成就记录器
+                  </div>
+                  <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">我的英雄成就图鉴</h1>
+                  <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base">
+                    记录每个英雄是否达到 7 级或 10 级成就；10级会自动计入7级以上。数据会自动保存在当前浏览器。英雄列表来自 Riot Data Dragon，当前版本：{version}。
+                  </p>
+                </div>
+
+                <div className="grid min-w-[280px] grid-cols-2 gap-3 rounded-3xl bg-slate-950/50 p-3 sm:grid-cols-4">
+                  <Stat label="10级" value={stats.level10} />
+                  <Stat label="单独7级" value={stats.level7Only} />
+                  <Stat label="7级以上" value={stats.level7Plus} />
+                  <Stat label="10级进度" value={`${stats.percent}%`} />
+                </div>
+              </div>
+
+              <div className="mt-6 h-3 overflow-hidden rounded-full bg-slate-800">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-amber-300 to-cyan-300 transition-all duration-500"
+                  style={{ width: `${stats.percent}%` }}
+                />
+              </div>
+            </div>
+
+            <div className="mb-6 grid gap-3 lg:grid-cols-[1fr_auto]">
+              <div className="relative">
+                <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">{ICONS.search}</span>
+                <input
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="搜索英雄名，例如：亚索、Lux、盖伦、射手、辅助……"
+                  className="w-full rounded-2xl border border-white/10 bg-white/10 py-3 pl-12 pr-4 text-slate-100 outline-none backdrop-blur placeholder:text-slate-400 focus:border-cyan-300/60"
+                />
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                <FilterButton active={filter === "all"} onClick={() => setFilter("all")}>全部</FilterButton>
+                <FilterButton active={filter === "level10"} onClick={() => setFilter("level10")}>10级</FilterButton>
+                <FilterButton active={filter === "level7"} onClick={() => setFilter("level7")}>单独7级</FilterButton>
+                <FilterButton active={filter === "level7Plus"} onClick={() => setFilter("level7Plus")}>7级以上</FilterButton>
+                <FilterButton active={filter === "todo"} onClick={() => setFilter("todo")}>未达成</FilterButton>
+
+                <button onClick={exportData} className="inline-flex items-center rounded-2xl bg-cyan-400 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-cyan-300">
+                  <span className="mr-2">{ICONS.download}</span> 导出
+                </button>
+
+                <label className="inline-flex cursor-pointer items-center rounded-2xl bg-white/10 px-4 py-2 text-sm font-medium text-slate-100 ring-1 ring-white/10 hover:bg-white/15">
+                  <span className="mr-2">{ICONS.upload}</span> 导入
+                  <input type="file" accept="application/json" className="hidden" onChange={importData} />
+                </label>
+
+                <button onClick={clearAll} className="inline-flex items-center rounded-2xl bg-white/10 px-4 py-2 text-sm font-semibold text-slate-100 ring-1 ring-white/10 hover:bg-white/15">
+                  <span className="mr-2">{ICONS.reset}</span> 清空
+                </button>
+              </div>
+            </div>
+
+            <div className="mb-6 rounded-3xl border border-amber-300/30 bg-amber-300/10 p-4">
+              <div className="mb-2 text-sm font-semibold text-amber-100">从 Canvas 备份文本导入</div>
+              <p className="mb-3 text-sm text-slate-300">
+                在 Canvas 里点“显示备份文本”，把从第一个左大括号到最后一个右大括号的内容完整复制到这里，然后点下面的按钮。
+              </p>
+              <textarea
+                value={importText}
+                onChange={(event) => setImportText(event.target.value)}
+                placeholder={'把 Canvas 里显示的 JSON 备份文本粘贴到这里，例如：\n{\n  "app": "LoL Mastery Level Tracker",\n  "version": 2,\n  "masteryLevels": {...}\n}'}
+                className="h-36 w-full rounded-2xl border border-white/10 bg-slate-950/70 p-3 font-mono text-xs text-slate-100 outline-none placeholder:text-slate-500"
+              />
+              <button
+                type="button"
+                onClick={importFromText}
+                className="mt-3 rounded-2xl bg-amber-300 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-200"
+              >
+                粘贴文本导入
+              </button>
+            </div>
+
+            {selectedChampion && (
+              <div className="mb-6 rounded-3xl border border-cyan-300/30 bg-cyan-300/10 p-4 text-slate-100">
+                <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <div className="text-sm text-cyan-100">ARAMGG 海克斯推荐</div>
+                    <div className="text-2xl font-bold">{selectedChampion.name}</div>
+                    <div className="text-sm text-slate-300">{selectedChampion.title}</div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedChampion(null)}
+                    className="rounded-2xl bg-white/10 px-4 py-2 text-sm font-semibold hover:bg-white/15"
+                  >
+                    关闭
+                  </button>
+                </div>
+
+                {aramLoadError ? (
+                  <div className="rounded-2xl bg-slate-950/60 p-4 text-sm text-amber-100">{aramLoadError}</div>
+                ) : !aramData ? (
+                  <div className="rounded-2xl bg-slate-950/60 p-4 text-sm text-slate-300">正在加载海克斯数据……</div>
+                ) : !selectedAram ? (
+                  <div className="rounded-2xl bg-slate-950/60 p-4 text-sm text-slate-300">
+                    暂时没有找到这个英雄的海克斯数据。可能是 aramgg 暂未收录，或英雄 key 对不上。
+                  </div>
+                ) : (
+                  <div>
+                    <div className="mb-3 text-sm text-slate-300">
+                      数据来源：aramgg.com；抓取时间：{aramData.scrapedAt ? new Date(aramData.scrapedAt).toLocaleString() : "未知"}。
+                    </div>
+                    <div className="overflow-x-auto rounded-2xl border border-white/10">
+                      <table className="w-full min-w-[640px] text-left text-sm">
+                        <thead className="bg-slate-950/70 text-slate-300">
+                          <tr>
+                            <th className="px-4 py-3">排名</th>
+                            <th className="px-4 py-3">海克斯</th>
+                            <th className="px-4 py-3">层级</th>
+                            <th className="px-4 py-3">胜率</th>
+                            <th className="px-4 py-3">选取率</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {(selectedAram.augments || []).slice(0, 20).map((augment) => (
+                            <tr key={`${augment.rank}-${augment.augmentId}`} className="border-t border-white/10 bg-white/5">
+                              <td className="px-4 py-3 font-bold text-cyan-100">#{augment.rank}</td>
+                              <td className="px-4 py-3">
+                                <div className="font-semibold">{augment.name || `#${augment.augmentId}`}</div>
+                                <div className="text-xs text-slate-400">ID: {augment.augmentId}</div>
+                              </td>
+                              <td className="px-4 py-3">{augment.tier}</td>
+                              <td className="px-4 py-3 text-emerald-200">{augment.winRate}</td>
+                              <td className="px-4 py-3">{augment.pickRate}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {loading ? (
+              <div className="rounded-3xl border border-white/10 bg-white/10 p-10 text-center text-slate-300">正在读取英雄列表……</div>
+            ) : filteredChampions.length === 0 ? (
+              <div className="rounded-3xl border border-white/10 bg-white/10 p-10 text-center text-slate-300">没有找到符合条件的英雄。</div>
+            ) : (
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {filteredChampions.map((champion) => {
+                  const level = masteryLevels[champion.id] || 0;
+                  const isLevel10 = level === 10;
+                  const isLevel7 = level === 7;
+                  const roleLabels = getRoleLabels(champion.tags);
+
+                  return (
+                    <div key={champion.id} className="animate-fade-in">
+                      <div
+                        className={classNames(
+                          "card-animate group overflow-hidden rounded-[1.75rem] border bg-white/10 shadow-xl hover:bg-white/15",
+                          isLevel10
+                            ? "border-amber-300/70 ring-2 ring-amber-300/30"
+                            : isLevel7
+                            ? "border-cyan-300/70 ring-2 ring-cyan-300/30"
+                            : "border-white/10"
+                        )}
+                      >
+                        <div className="relative h-40 overflow-hidden">
+                          <img
+                            src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.id}_0.jpg`}
+                            alt={champion.name}
+                            className="image-zoom h-full w-full object-cover"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+
+                          <div className="absolute right-3 top-3 rounded-full bg-slate-950/75 p-2 backdrop-blur">
+                            {isLevel10 ? (
+                              <span className="text-xl">{ICONS.check}</span>
+                            ) : isLevel7 ? (
+                              <span className="text-xl">{ICONS.medal}</span>
+                            ) : (
+                              <span className="text-xl text-slate-300">{ICONS.circle}</span>
+                            )}
+                          </div>
+
+                          {level > 0 && (
+                            <div
+                              className={classNames(
+                                "absolute left-3 top-3 inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold text-slate-950",
+                                isLevel10 ? "bg-amber-300" : "bg-cyan-300"
+                              )}
+                            >
+                              <span>{isLevel10 ? ICONS.trophy : ICONS.medal}</span> Lv.{level}
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="p-4">
+                          <h2 className="text-xl font-bold text-slate-50">{champion.name}</h2>
+                          <p className="mt-1 line-clamp-1 text-sm text-slate-300">{champion.title}</p>
+
+                          <div className="mt-3 flex flex-wrap gap-2">
+                            {roleLabels.map((role) => (
+                              <span key={role} className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-2.5 py-1 text-xs font-medium text-cyan-100">
+                                {role}
+                              </span>
+                            ))}
+                          </div>
+
+                          <div className="mt-4 grid grid-cols-3 gap-2">
+                            <button
+                              type="button"
+                              onClick={() => setChampionLevel(champion.id, 7)}
+                              className={classNames(
+                                "rounded-2xl px-3 py-2 text-sm font-semibold transition",
+                                isLevel7 ? "bg-cyan-300 text-slate-950 hover:bg-cyan-200" : "bg-slate-800 text-slate-200 hover:bg-slate-700"
+                              )}
+                            >
+                              7级
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => setChampionLevel(champion.id, 10)}
+                              className={classNames(
+                                "rounded-2xl px-3 py-2 text-sm font-semibold transition",
+                                isLevel10 ? "bg-amber-300 text-slate-950 hover:bg-amber-200" : "bg-slate-800 text-slate-200 hover:bg-slate-700"
+                              )}
+                            >
+                              10级
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => setChampionLevel(champion.id, 0)}
+                              className="rounded-2xl bg-white/10 px-3 py-2 text-sm font-semibold text-slate-200 transition hover:bg-white/15"
+                            >
+                              清除
+                            </button>
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={() => setSelectedChampion(champion)}
+                            className="mt-3 w-full rounded-2xl border border-cyan-300/30 bg-cyan-300/10 px-3 py-2 text-sm font-semibold text-cyan-100 transition hover:bg-cyan-300/20"
+                          >
+                            查看前20海克斯推荐
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    function Stat({ label, value }) {
+      return (
+        <div className="rounded-2xl bg-white/10 p-4 text-center">
+          <div className="text-2xl font-black text-white">{value}</div>
+          <div className="mt-1 text-xs text-slate-300">{label}</div>
+        </div>
+      );
+    }
+
+    function FilterButton({ active, onClick, children }) {
+      return (
+        <button
+          type="button"
+          onClick={onClick}
+          className={classNames(
+            "rounded-2xl px-4 py-2 text-sm font-medium ring-1 transition",
+            active ? "bg-white text-slate-950 ring-white" : "bg-white/10 text-slate-100 ring-white/10 hover:bg-white/15"
+          )}
+        >
+          {children}
+        </button>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<LolMasteryTracker />);
+  </script>
+</body>
+</html>
