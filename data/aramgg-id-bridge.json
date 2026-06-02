@@ -1,0 +1,254 @@
+{
+  "source": {
+    "detection": "data/aramgg-id-map-detection.json",
+    "cdragon": "data/cdragon-arena-augments.json"
+  },
+  "builtAt": "2026-06-02T00:04:52.174Z",
+  "minConfidence": "medium",
+  "mappedCount": 12,
+  "skippedCount": 0,
+  "byAramggId": {
+    "1051": {
+      "aramggId": "1051",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "22",
+      "nameZh": "灵巧",
+      "nameEn": "Deft",
+      "name": "灵巧",
+      "apiName": "Deft",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/deft_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1052": {
+      "aramggId": "1052",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "26",
+      "nameZh": "唯快不破",
+      "nameEn": "Don't Blink",
+      "name": "唯快不破",
+      "apiName": "DontBlink",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dontblink_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1071": {
+      "aramggId": "1071",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "70",
+      "nameZh": "无休回复",
+      "nameEn": "Restless Restoration",
+      "name": "无休回复",
+      "apiName": "RestlessRestoration",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/restlessrestoration_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1073": {
+      "aramggId": "1073",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "4",
+      "nameZh": "回归基本功",
+      "nameEn": "Back To Basics",
+      "name": "回归基本功",
+      "apiName": "BacktoBasics",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/backtobasics_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1081": {
+      "aramggId": "1081",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "28",
+      "nameZh": "侵蚀",
+      "nameEn": "Erosion",
+      "name": "侵蚀",
+      "apiName": "Erosion",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/erosion_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1195": {
+      "aramggId": "1195",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "194",
+      "nameZh": "精怪魔法",
+      "nameEn": "Fey Magic",
+      "name": "精怪魔法",
+      "apiName": "FeyMagic",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/feymagic_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1220": {
+      "aramggId": "1220",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "28",
+      "nameZh": "侵蚀",
+      "nameEn": "Erosion",
+      "name": "侵蚀",
+      "apiName": "Erosion",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/erosion_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1225": {
+      "aramggId": "1225",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "28",
+      "nameZh": "侵蚀",
+      "nameEn": "Erosion",
+      "name": "侵蚀",
+      "apiName": "Erosion",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/erosion_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1238": {
+      "aramggId": "1238",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "26",
+      "nameZh": "唯快不破",
+      "nameEn": "Don't Blink",
+      "name": "唯快不破",
+      "apiName": "DontBlink",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dontblink_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1346": {
+      "aramggId": "1346",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "118",
+      "nameZh": "会心治疗",
+      "nameEn": "Critical Healing",
+      "name": "会心治疗",
+      "apiName": "CriticalHealing",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/criticalhealing_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/champion-stats/157#inline-script-29",
+      "evidenceType": "inline-script"
+    },
+    "1356": {
+      "aramggId": "1356",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "25",
+      "nameZh": "俯冲轰炸",
+      "nameEn": "Dive Bomber",
+      "name": "俯冲轰炸",
+      "apiName": "DiveBomber",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/divebomber_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "2010": {
+      "aramggId": "2010",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "20",
+      "nameZh": "黎明使者的坚决",
+      "nameEn": "Dawnbringer's Resolve",
+      "name": "黎明使者的坚决",
+      "apiName": "DawnbringersResolve",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    }
+  },
+  "skipped": {},
+  "note": "Bridge table from aramgg internal augment ids to CommunityDragon augment metadata. The webpage should look up byAramggId[augmentId] before falling back to raw #ID."
+}
