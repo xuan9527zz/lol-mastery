@@ -1,4 +1,4 @@
-name: Build aramgg id bridge from detail pages once
+name: Scrape ApexLoL hextech dictionary once
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 jobs:
-  build-aramgg-detail-bridge:
+  scrape-apexlol-hextech:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,13 +22,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build aramgg bridge with ApexLoL first
-        run: node scripts/build-aramgg-id-bridge-from-detail-pages.js
+      - name: Scrape ApexLoL hextech dictionary
+        run: node scripts/scrape-apexlol-hextech.js
 
-      - name: Commit generated bridge data
+      - name: Commit generated ApexLoL dictionary
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git add data/aramgg-id-bridge.json
-          git commit -m "Build aramgg id bridge with ApexLoL first" || echo "No changes to commit"
+          git add data/apexlol-hextech-dictionary.json
+          git commit -m "Add ApexLoL hextech dictionary snapshot" || echo "No changes to commit"
           git push
