@@ -1,0 +1,31 @@
+name: Build aramgg id bridge once
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-aramgg-id-bridge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build aramgg id bridge
+        run: node scripts/build-aramgg-id-bridge.js
+
+      - name: Commit generated bridge data
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add data/aramgg-id-bridge.json
+          git commit -m "Build aramgg id bridge" || echo "No changes to commit"
+          git push
