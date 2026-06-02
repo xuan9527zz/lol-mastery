@@ -5,6 +5,7 @@ import path from "node:path";
 const BASE = "https://aramgg.com";
 const LANG = "zh-CN";
 const ARAMGG_AUGMENTS_PATH = path.join("data", "aramgg-augments.json");
+const APEX_PATH = path.join("data", "apexlol-hextech-dictionary.json");
 const CDRAGON_PATH = path.join("data", "cdragon-arena-augments.json");
 const OUT_PATH = path.join("data", "aramgg-id-bridge.json");
 
@@ -21,8 +22,12 @@ function cleanAramggName(text = "") {
   return normalizeText(text)
     .replace(/海克斯强化详情.*$/u, "")
     .replace(/海克斯详情.*$/u, "")
+    .replace(/强化详情.*$/u, "")
+    .replace(/详情.*$/u, "")
     .replace(/\s*[-|｜]\s*胜率.*$/u, "")
+    .replace(/\s*[-|｜]\s*最佳英雄搭配.*$/u, "")
     .replace(/\s*[-|｜]\s*aramgg.*$/iu, "")
+    .replace(/\s*\|\s*aramgg.*$/iu, "")
     .replace(/^首页\s*/u, "")
     .replace(/^海克斯排行\s*/u, "")
     .replace(/Augment\s*#?\d+.*$/iu, "")
@@ -35,12 +40,20 @@ function normalizeName(text = "") {
     .replace(/[^\p{L}\p{N}]+/gu, "");
 }
 
-function absoluteUrl(url) {
-  if (!url) return "";
-  if (url.startsWith("http://") || url.startsWith("https://")) return url;
-  if (url.startsWith("//")) return `https:${url}`;
-  if (url.startsWith("/")) return `${BASE}${url}`;
-  return `${BASE}/${url}`;
+function normalizeSlug(text = "") {
+  return String(text).toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+function looseNameKey(text = "") {
+  return normalizeName(text)
+    .replace(/擊/g, "击")
+    .replace(/鎚/g, "锤")
+    .replace(/連/g, "连")
+    .replace(/撥/g, "拨")
+    .replace(/雙/g, "双")
+    .replace(/發/g, "发")
+    .replace(/亂/g, "乱")
+    .replace(/療/g, "疗");
 }
 
 async function fetchText(url) {
@@ -59,13 +72,17 @@ async function fetchText(url) {
   return await response.text();
 }
 
-async function readJson(filePath) {
-  const raw = await readFile(filePath, "utf8");
-  return JSON.parse(raw);
+async function readJsonMaybe(filePath, fallback = null) {
+  try {
+    const raw = await readFile(filePath, "utf8");
+    return JSON.parse(raw);
+  } catch {
+    return fallback;
+  }
 }
 
 async function collectAramggIds() {
-  const data = await readJson(ARAMGG_AUGMENTS_PATH);
+  const data = await readJsonMaybe(ARAMGG_AUGMENTS_PATH, { champions: {} });
   const ids = new Set();
 
   for (const champion of Object.values(data.champions || {})) {
@@ -78,8 +95,29 @@ async function collectAramggIds() {
   return [...ids].sort((a, b) => Number(a) - Number(b)).slice(0, MAX_IDS);
 }
 
+function buildApexLookup(apex) {
+  const byName = new Map();
+
+  for (const item of apex.hextech || []) {
+    const keys = [
+      item.nameZh,
+      ...(item.aliasesZh || []),
+    ].filter(Boolean);
+
+    for (const key of keys) {
+      const exact = normalizeName(key);
+      const loose = looseNameKey(key);
+      if (exact && !byName.has(exact)) byName.set(exact, item);
+      if (loose && !byName.has(loose)) byName.set(loose, item);
+    }
+  }
+
+  return { byName };
+}
+
 function buildCdragonLookup(cdragon) {
-  const byNormalizedName = new Map();
+  const byName = new Map();
+  const bySlug = new Map();
 
   for (const item of cdragon.augments || []) {
     const names = [
@@ -90,143 +128,118 @@ function buildCdragonLookup(cdragon) {
     ].filter(Boolean);
 
     for (const name of names) {
-      const key = normalizeName(name);
-      if (!key) continue;
-      if (!byNormalizedName.has(key)) byNormalizedName.set(key, item);
+      const exact = normalizeName(name);
+      const loose = looseNameKey(name);
+      if (exact && !byName.has(exact)) byName.set(exact, item);
+      if (loose && !byName.has(loose)) byName.set(loose, item);
+    }
+
+    const slugKeys = [
+      item.apiName,
+      item.nameEn,
+      item.icon,
+    ].filter(Boolean);
+
+    for (const slug of slugKeys) {
+      const key = normalizeSlug(slug);
+      if (key && !bySlug.has(key)) bySlug.set(key, item);
     }
   }
 
-  return { byNormalizedName };
+  return { byName, bySlug, augments: cdragon.augments || [] };
 }
 
-function parseNameFromBreadcrumbs($, id) {
-  const candidates = [];
+function matchApex(apexLookup, name) {
+  const exact = apexLookup.byName.get(normalizeName(name));
+  if (exact) return exact;
 
-  // aramgg detail pages expose breadcrumb text like:
-  // 首页 / 海克斯排行 / 连拨击锤
-  $("nav, ol, ul, header, main, body").each((_, el) => {
-    const text = normalizeText($(el).text());
-    if (!text.includes("海克斯排行") || !text.includes(`Augment#${id}`) && !text.includes(`Augment #${id}`)) return;
+  const loose = apexLookup.byName.get(looseNameKey(name));
+  if (loose) return loose;
 
-    const re = new RegExp(`海克斯排行\\s+(.{1,40}?)\\s+Augment\\s*#?${id}`, "u");
-    const match = text.match(re);
+  return null;
+}
+
+function matchCdragon(cdragonLookup, name, apexItem) {
+  // 1) Try Apex slug against CDragon apiName/icon/nameEn.
+  if (apexItem?.slug) {
+    const slug = normalizeSlug(apexItem.slug);
+    const bySlug = cdragonLookup.bySlug.get(slug);
+    if (bySlug) return { item: bySlug, method: "apex-slug-to-cdragon" };
+
+    // contains matching, e.g. doubletap vs augmenticons/doubletap_large.png
+    const candidates = cdragonLookup.augments.filter((item) => {
+      const values = [item.apiName, item.nameEn, item.icon].map(normalizeSlug);
+      return values.some((value) => value && (value.includes(slug) || slug.includes(value)));
+    });
+
+    if (candidates.length === 1) {
+      return { item: candidates[0], method: "apex-slug-contains-cdragon" };
+    }
+  }
+
+  // 2) Try Chinese names.
+  const exact = cdragonLookup.byName.get(normalizeName(name));
+  if (exact) return { item: exact, method: "cdragon-exact-name" };
+
+  const loose = cdragonLookup.byName.get(looseNameKey(name));
+  if (loose) return { item: loose, method: "cdragon-loose-name" };
+
+  return { item: null, method: "none" };
+}
+
+function parseAramggName(html, id) {
+  const $ = cheerio.load(html);
+  const title = normalizeText($("title").first().text());
+  const body = normalizeText($("body").text());
+
+  const titleMatch = title.match(/^(.+?)海克斯强化详情/u);
+  if (titleMatch) {
+    const name = cleanAramggName(titleMatch[1]);
+    if (name) return { name, title, body };
+  }
+
+  const bodyPatterns = [
+    new RegExp(`海克斯排行\\s+(.{1,60}?)\\s+Augment\\s*#?${id}`, "u"),
+    new RegExp(`(.{1,60}?)\\s+Augment\\s*#?${id}`, "u"),
+  ];
+
+  for (const pattern of bodyPatterns) {
+    const match = body.match(pattern);
     if (match) {
       const name = cleanAramggName(match[1]);
-      if (name && name.length <= 20) candidates.push(name);
+      if (name && name.length <= 20 && !name.includes("首页")) {
+        return { name, title, body };
+      }
     }
-  });
+  }
 
-  // More direct: collect short text nodes/elements around breadcrumb links.
-  $("a, span, div, li, p").each((_, el) => {
-    const text = cleanAramggName($(el).text());
-    if (!text || text.length > 20) return;
-    if (["首页", "海克斯排行", "捐赠", "快速链接", "关于我们"].includes(text)) return;
-    if (/^#?\d+$/.test(text)) return;
-    if (/胜率|选取率|场次|阶段|版本|语言|ARAMGG|Augment/i.test(text)) return;
+  const h1 = cleanAramggName($("h1").first().text());
+  if (h1) return { name: h1, title, body };
 
-    const parentText = normalizeText($(el).parent().text());
-    if (parentText.includes("海克斯排行") || parentText.includes(`Augment#${id}`) || parentText.includes(`Augment #${id}`)) {
-      candidates.push(text);
-    }
-  });
-
-  // Return the shortest plausible candidate; breadcrumb names are usually very short.
-  candidates.sort((a, b) => a.length - b.length);
-  return candidates[0] || "";
+  return { name: "", title, body };
 }
 
-function parseAramggAugmentDetail(html, id, url) {
-  const $ = cheerio.load(html);
-  const bodyText = normalizeText($("body").text());
-  const title = normalizeText($("title").first().text());
-
-  let name = "";
-
-  // 1) Most reliable: breadcrumb/body around "海克斯排行 ... Augment#id"
-  name = parseNameFromBreadcrumbs($, id);
-
-  // 2) Body regex fallback.
-  if (!name) {
-    const patterns = [
-      new RegExp(`海克斯排行\\s+(.{1,40}?)\\s+Augment\\s*#?${id}`, "u"),
-      new RegExp(`(.{1,40}?)\\s+Augment\\s*#?${id}`, "u"),
-    ];
-
-    for (const pattern of patterns) {
-      const match = bodyText.match(pattern);
-      if (match) {
-        const candidate = cleanAramggName(match[1]);
-        if (candidate && candidate.length <= 20 && !candidate.includes("首页")) {
-          name = candidate;
-          break;
-        }
-      }
-    }
-  }
-
-  // 3) Title fallback: "连拨击锤海克斯强化详情 - ..."
-  if (!name) {
-    const titleMatch = title.match(/^(.+?)海克斯强化详情/u);
-    if (titleMatch) name = cleanAramggName(titleMatch[1]);
-  }
-
-  // 4) H1/H2 fallback.
-  if (!name) {
-    const headings = $("h1,h2,h3")
-      .map((_, el) => cleanAramggName($(el).text()))
-      .get()
-      .filter(Boolean);
-
-    for (const heading of headings) {
-      if (
-        heading &&
-        !heading.includes("Augment") &&
-        !heading.includes(`#${id}`) &&
-        !heading.includes("海克斯") &&
-        heading.length <= 20
-      ) {
-        name = heading;
-        break;
-      }
-    }
-  }
-
-  const rarityMatch = bodyText.match(/(白银|黄金|棱彩)\s*T\s*([1-5])/);
-  const winRateMatch = bodyText.match(/胜率\s*([\d.]+%)/);
-  const pickRateMatch = bodyText.match(/选取率\s*([\d.]+%)/);
-  const gamesMatch = bodyText.match(/场次\s*([\d,]+)/);
-
-  let image = "";
-  $("img").each((_, img) => {
-    if (image) return;
-    const src = $(img).attr("src") || $(img).attr("data-src") || "";
-    const alt = normalizeText($(img).attr("alt") || "");
-    const full = absoluteUrl(src);
-    const lower = full.toLowerCase();
-
-    if (!src) return;
-    if (alt === name || lower.includes("augment") || lower.includes("cherry") || lower.includes("hextech")) {
-      image = full;
-    }
-  });
+function parseRates(body) {
+  const rarityMatch = body.match(/(白银|黄金|棱彩)\s*T\s*([1-5])/);
+  const winRateMatch = body.match(/胜率\s*([\d.]+%)/);
+  const pickRateMatch = body.match(/选取率\s*([\d.]+%)/);
+  const gamesMatch = body.match(/场次\s*([\d,]+)/);
 
   return {
-    aramggId: id,
-    aramggUrl: url,
-    nameZh: name,
     rarity: rarityMatch?.[1] || "",
     tier: rarityMatch ? `T${rarityMatch[2]}` : "",
-    winRate: winRateMatch?.[1] || "",
-    pickRate: pickRateMatch?.[1] || "",
+    winRateOverall: winRateMatch?.[1] || "",
+    pickRateOverall: pickRateMatch?.[1] || "",
     games: gamesMatch?.[1] || "",
-    imageFromAramgg: image,
-    title,
   };
 }
 
 async function main() {
   const ids = await collectAramggIds();
-  const cdragon = await readJson(CDRAGON_PATH);
+  const apex = await readJsonMaybe(APEX_PATH, { hextech: [] });
+  const cdragon = await readJsonMaybe(CDRAGON_PATH, { augments: [] });
+
+  const apexLookup = buildApexLookup(apex);
   const cdragonLookup = buildCdragonLookup(cdragon);
 
   const byAramggId = {};
@@ -234,6 +247,8 @@ async function main() {
   const unmatched = [];
 
   console.log(`Found ${ids.length} aramgg augment ids.`);
+  console.log(`ApexLoL entries: ${(apex.hextech || []).length}`);
+  console.log(`CommunityDragon entries: ${(cdragon.augments || []).length}`);
 
   for (let i = 0; i < ids.length; i++) {
     const id = ids[i];
@@ -242,43 +257,55 @@ async function main() {
     try {
       console.log(`[${i + 1}/${ids.length}] ${url}`);
       const html = await fetchText(url);
-      const detail = parseAramggAugmentDetail(html, id, url);
+      const parsed = parseAramggName(html, id);
+      const rates = parseRates(parsed.body);
 
-      const normalized = normalizeName(detail.nameZh);
-      const cdragonInfo = normalized ? cdragonLookup.byNormalizedName.get(normalized) : null;
+      const apexItem = parsed.name ? matchApex(apexLookup, parsed.name) : null;
+      const cdragonMatch = parsed.name ? matchCdragon(cdragonLookup, parsed.name, apexItem) : { item: null, method: "none" };
+      const cdragonInfo = cdragonMatch.item;
+
+      const icon = apexItem?.image || cdragonInfo?.icon || "";
 
       byAramggId[id] = {
         aramggId: id,
-        source: "aramgg-detail-page",
-        confidence: detail.nameZh ? "official-page" : "name-missing",
-        score: detail.nameZh ? 10000 : 0,
+        source: "aramgg-detail-page-apexlol-first",
+        confidence: parsed.name ? "official-page" : "name-missing",
+        score: parsed.name ? 10000 : 0,
         cdragonId: cdragonInfo?.id || "",
-        nameZh: detail.nameZh || `#${id}`,
+        nameZh: parsed.name || `#${id}`,
         nameEn: cdragonInfo?.nameEn || "",
-        name: cdragonInfo?.name || detail.nameZh || `#${id}`,
+        name: parsed.name || cdragonInfo?.name || `#${id}`,
         apiName: cdragonInfo?.apiName || "",
-        icon: cdragonInfo?.icon || detail.imageFromAramgg || "",
-        rarity: detail.rarity || cdragonInfo?.rarity || "",
-        tier: detail.tier || "",
-        winRateOverall: detail.winRate || "",
-        pickRateOverall: detail.pickRate || "",
-        games: detail.games || "",
-        aramggUrl: detail.aramggUrl,
+        icon,
+        rarity: rates.rarity || cdragonInfo?.rarity || apexItem?.tier || "",
+        tier: rates.tier || "",
+        winRateOverall: rates.winRateOverall,
+        pickRateOverall: rates.pickRateOverall,
+        games: rates.games,
+        aramggUrl: url,
+        matchedApex: Boolean(apexItem),
+        apexSlug: apexItem?.slug || "",
+        apexUrl: apexItem?.url || "",
+        apexDescription: apexItem?.description || "",
         matchedCdragon: Boolean(cdragonInfo),
-        matchMethod: cdragonInfo ? "exact-normalized-name" : "none",
-        title: detail.title,
+        matchMethod: apexItem
+          ? cdragonInfo
+            ? `apex+${cdragonMatch.method}`
+            : "apex-only"
+          : cdragonMatch.method,
+        title: parsed.title,
       };
 
-      if (!detail.nameZh || !cdragonInfo) {
+      if (!parsed.name || !apexItem && !cdragonInfo) {
         unmatched.push({
           aramggId: id,
-          nameZh: detail.nameZh,
-          reason: !detail.nameZh ? "No name parsed from detail page" : "No exact CommunityDragon name match",
+          nameZh: parsed.name,
+          reason: !parsed.name ? "No name parsed from aramgg detail page" : "No ApexLoL or CommunityDragon match",
           url,
         });
       }
 
-      await sleep(SLEEP_MS);
+      await sleep(200);
     } catch (error) {
       failures.push({
         aramggId: id,
@@ -288,7 +315,7 @@ async function main() {
 
       byAramggId[id] = {
         aramggId: id,
-        source: "aramgg-detail-page",
+        source: "aramgg-detail-page-apexlol-first",
         confidence: "fetch-failed",
         score: 0,
         cdragonId: "",
@@ -299,30 +326,34 @@ async function main() {
         icon: "",
         rarity: "",
         aramggUrl: url,
+        matchedApex: false,
         matchedCdragon: false,
         matchMethod: "none",
       };
     }
   }
 
+  const values = Object.values(byAramggId);
   const payload = {
     source: {
       aramggAugments: ARAMGG_AUGMENTS_PATH,
+      apexlol: APEX_PATH,
       cdragon: CDRAGON_PATH,
       detailPagePattern: `${BASE}/${LANG}/augments/{id}`,
     },
     builtAt: new Date().toISOString(),
-    method: "official-aramgg-augment-detail-pages-v2-clean-name",
-    mappedCount: Object.keys(byAramggId).length,
-    matchedCdragonCount: Object.values(byAramggId).filter((item) => item.matchedCdragon).length,
-    iconCount: Object.values(byAramggId).filter((item) => item.icon).length,
+    method: "aramgg-detail-page-name-apexlol-first-communitydragon-second",
+    mappedCount: values.length,
+    matchedApexCount: values.filter((item) => item.matchedApex).length,
+    matchedCdragonCount: values.filter((item) => item.matchedCdragon).length,
+    iconCount: values.filter((item) => item.icon).length,
     failureCount: failures.length,
     unmatchedCount: unmatched.length,
     byAramggId,
     unmatched,
     failures,
     note:
-      "Accurate bridge table built from aramgg augment detail pages. v2 cleans names from breadcrumb/body/title to avoid title suffix contamination.",
+      "Accurate bridge from aramgg id detail pages. Name/icon mapping prioritizes ApexLoL, then falls back to CommunityDragon.",
   };
 
   await mkdir(path.dirname(OUT_PATH), { recursive: true });
@@ -330,6 +361,7 @@ async function main() {
 
   console.log(`Saved ${OUT_PATH}`);
   console.log(`Mapped: ${payload.mappedCount}`);
+  console.log(`Matched ApexLoL: ${payload.matchedApexCount}`);
   console.log(`Matched CDragon: ${payload.matchedCdragonCount}`);
   console.log(`Icons: ${payload.iconCount}`);
   console.log(`Failures: ${payload.failureCount}`);
