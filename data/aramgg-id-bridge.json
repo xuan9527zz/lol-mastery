@@ -3,11 +3,511 @@
     "detection": "data/aramgg-id-map-detection.json",
     "cdragon": "data/cdragon-arena-augments.json"
   },
-  "builtAt": "2026-06-02T00:04:52.174Z",
+  "builtAt": "2026-06-02T00:13:15.848Z",
   "minConfidence": "medium",
-  "mappedCount": 12,
+  "mappedCount": 145,
   "skippedCount": 0,
   "byAramggId": {
+    "1002": {
+      "aramggId": "1002",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "2",
+      "nameZh": "尖端发明家",
+      "nameEn": "Apex Inventor",
+      "name": "尖端发明家",
+      "apiName": "ApexInventor",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/apexinventor_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1006": {
+      "aramggId": "1006",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "6",
+      "nameZh": "利刃华尔兹",
+      "nameEn": "Blade Waltz",
+      "name": "利刃华尔兹",
+      "apiName": "BladeWaltz",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/bladewaltz_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1013": {
+      "aramggId": "1013",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "13",
+      "nameZh": "星界躯体",
+      "nameEn": "Celestial Body",
+      "name": "星界躯体",
+      "apiName": "CelestialBody",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/celestialbody_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1015": {
+      "aramggId": "1015",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "15",
+      "nameZh": "死亡之环",
+      "nameEn": "Circle of Death",
+      "name": "死亡之环",
+      "apiName": "CircleofDeath",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/circleofdeath_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1018": {
+      "aramggId": "1018",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "15",
+      "nameZh": "死亡之环",
+      "nameEn": "Circle of Death",
+      "name": "死亡之环",
+      "apiName": "CircleofDeath",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/circleofdeath_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1019": {
+      "aramggId": "1019",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "4",
+      "nameZh": "回归基本功",
+      "nameEn": "Back To Basics",
+      "name": "回归基本功",
+      "apiName": "BacktoBasics",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/backtobasics_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1022": {
+      "aramggId": "1022",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "22",
+      "nameZh": "灵巧",
+      "nameEn": "Deft",
+      "name": "灵巧",
+      "apiName": "Deft",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/deft_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1023": {
+      "aramggId": "1023",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "23",
+      "nameZh": "魔鬼之舞",
+      "nameEn": "Demon's Dance",
+      "name": "魔鬼之舞",
+      "apiName": "DemonsDance",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/demonsdance_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1027": {
+      "aramggId": "1027",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "26",
+      "nameZh": "唯快不破",
+      "nameEn": "Don't Blink",
+      "name": "唯快不破",
+      "apiName": "DontBlink",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dontblink_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1028": {
+      "aramggId": "1028",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "23",
+      "nameZh": "魔鬼之舞",
+      "nameEn": "Demon's Dance",
+      "name": "魔鬼之舞",
+      "apiName": "DemonsDance",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/demonsdance_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1029": {
+      "aramggId": "1029",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "28",
+      "nameZh": "侵蚀",
+      "nameEn": "Erosion",
+      "name": "侵蚀",
+      "apiName": "Erosion",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/erosion_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1030": {
+      "aramggId": "1030",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "29",
+      "nameZh": "虚幻武器",
+      "nameEn": "Ethereal Weapon",
+      "name": "虚幻武器",
+      "apiName": "EtherealWeapon",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/etherealweapon_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1032": {
+      "aramggId": "1032",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "4",
+      "nameZh": "回归基本功",
+      "nameEn": "Back To Basics",
+      "name": "回归基本功",
+      "apiName": "BacktoBasics",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/backtobasics_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1036": {
+      "aramggId": "1036",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "35",
+      "nameZh": "感受燃烧",
+      "nameEn": "Feel the Burn",
+      "name": "感受燃烧",
+      "apiName": "FeeltheBurn",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/feeltheburn_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1037": {
+      "aramggId": "1037",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "36",
+      "nameZh": "火上浇油",
+      "nameEn": "Firebrand",
+      "name": "火上浇油",
+      "apiName": "Firebrand",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/firebrand_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1038": {
+      "aramggId": "1038",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "9",
+      "nameZh": "霸符兄弟",
+      "nameEn": "Buff Buddies",
+      "name": "霸符兄弟",
+      "apiName": "BuffBuddies",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/buffbuddies_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1039": {
+      "aramggId": "1039",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "39",
+      "nameZh": "冰霜 幽灵",
+      "nameEn": "Frost Wraith",
+      "name": "冰霜 幽灵",
+      "apiName": "FrostWraith",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/frostwraith_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1041": {
+      "aramggId": "1041",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "25",
+      "nameZh": "俯冲轰炸",
+      "nameEn": "Dive Bomber",
+      "name": "俯冲轰炸",
+      "apiName": "DiveBomber",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/divebomber_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1042": {
+      "aramggId": "1042",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "28",
+      "nameZh": "侵蚀",
+      "nameEn": "Erosion",
+      "name": "侵蚀",
+      "apiName": "Erosion",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/erosion_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1044": {
+      "aramggId": "1044",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "42",
+      "nameZh": "恶趣味",
+      "nameEn": "Guilty Pleasure",
+      "name": "恶趣味",
+      "apiName": "GuiltyPleasure",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/guiltypleasure_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1045": {
+      "aramggId": "1045",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "28",
+      "nameZh": "侵蚀",
+      "nameEn": "Erosion",
+      "name": "侵蚀",
+      "apiName": "Erosion",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/erosion_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1046": {
+      "aramggId": "1046",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "46",
+      "nameZh": "炼狱龙魂",
+      "nameEn": "Infernal Soul",
+      "name": "炼狱龙魂",
+      "apiName": "InfernalSoul",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/infernalsoul_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1047": {
+      "aramggId": "1047",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "46",
+      "nameZh": "炼狱龙魂",
+      "nameEn": "Infernal Soul",
+      "name": "炼狱龙魂",
+      "apiName": "InfernalSoul",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/infernalsoul_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1048": {
+      "aramggId": "1048",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "6",
+      "nameZh": "利刃华尔兹",
+      "nameEn": "Blade Waltz",
+      "name": "利刃华尔兹",
+      "apiName": "BladeWaltz",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/bladewaltz_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1050": {
+      "aramggId": "1050",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "48",
+      "nameZh": "珠光护手",
+      "nameEn": "Jeweled Gauntlet",
+      "name": "珠光护手",
+      "apiName": "JeweledGauntlet",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/jeweledgauntlet_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
     "1051": {
       "aramggId": "1051",
       "confidence": "high",
@@ -39,6 +539,186 @@
       "apiName": "DontBlink",
       "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dontblink_large.png",
       "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1054": {
+      "aramggId": "1054",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "26",
+      "nameZh": "唯快不破",
+      "nameEn": "Don't Blink",
+      "name": "唯快不破",
+      "apiName": "DontBlink",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dontblink_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1056": {
+      "aramggId": "1056",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "20",
+      "nameZh": "黎明使者的坚决",
+      "nameEn": "Dawnbringer's Resolve",
+      "name": "黎明使者的坚决",
+      "apiName": "DawnbringersResolve",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1057": {
+      "aramggId": "1057",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "20",
+      "nameZh": "黎明使者的坚决",
+      "nameEn": "Dawnbringer's Resolve",
+      "name": "黎明使者的坚决",
+      "apiName": "DawnbringersResolve",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1058": {
+      "aramggId": "1058",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "57",
+      "nameZh": "山脉龙魂",
+      "nameEn": "Mountain Soul",
+      "name": "山脉龙魂",
+      "apiName": "MountainSoul",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/mountainsoul_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1063": {
+      "aramggId": "1063",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "62",
+      "nameZh": "全能龙魂",
+      "nameEn": "Omni Soul",
+      "name": "全能龙魂",
+      "apiName": "OmniSoul",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/omnisoul_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1064": {
+      "aramggId": "1064",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "6",
+      "nameZh": "利刃华尔兹",
+      "nameEn": "Blade Waltz",
+      "name": "利刃华尔兹",
+      "apiName": "BladeWaltz",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/bladewaltz_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1067": {
+      "aramggId": "1067",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "67",
+      "nameZh": "古式佳酿",
+      "nameEn": "Rabble Rousing",
+      "name": "古式佳酿",
+      "apiName": "RabbleRousing",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/rabblerousing_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1068": {
+      "aramggId": "1068",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "67",
+      "nameZh": "古式佳酿",
+      "nameEn": "Rabble Rousing",
+      "name": "古式佳酿",
+      "apiName": "RabbleRousing",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/rabblerousing_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1070": {
+      "aramggId": "1070",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "4",
+      "nameZh": "回归基本功",
+      "nameEn": "Back To Basics",
+      "name": "回归基本功",
+      "apiName": "BacktoBasics",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/backtobasics_large.png",
+      "rarity": "2",
       "hitKinds": [
         "nameZh",
         "nameEn",
@@ -88,8 +768,728 @@
       "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
       "evidenceType": "inline-script"
     },
+    "1074": {
+      "aramggId": "1074",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "73",
+      "nameZh": "暗影疾奔",
+      "nameEn": "Shadow Runner",
+      "name": "暗影疾奔",
+      "apiName": "ShadowRunner",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/shadowrunner_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1075": {
+      "aramggId": "1075",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "20",
+      "nameZh": "黎明使者的坚决",
+      "nameEn": "Dawnbringer's Resolve",
+      "name": "黎明使者的坚决",
+      "apiName": "DawnbringersResolve",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1076": {
+      "aramggId": "1076",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "26",
+      "nameZh": "唯快不破",
+      "nameEn": "Don't Blink",
+      "name": "唯快不破",
+      "apiName": "DontBlink",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dontblink_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1077": {
+      "aramggId": "1077",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "25",
+      "nameZh": "俯冲轰炸",
+      "nameEn": "Dive Bomber",
+      "name": "俯冲轰炸",
+      "apiName": "DiveBomber",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/divebomber_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1079": {
+      "aramggId": "1079",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "77",
+      "nameZh": "灵魂虹吸",
+      "nameEn": "Soul Siphon",
+      "name": "灵魂虹吸",
+      "apiName": "SoulSiphon",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/soulsiphon_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
     "1081": {
       "aramggId": "1081",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "28",
+      "nameZh": "侵蚀",
+      "nameEn": "Erosion",
+      "name": "侵蚀",
+      "apiName": "Erosion",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/erosion_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1082": {
+      "aramggId": "1082",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "81",
+      "nameZh": "踢踏舞",
+      "nameEn": "Tap Dancer",
+      "name": "踢踏舞",
+      "apiName": "TapDancer",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/tapdancer_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1084": {
+      "aramggId": "1084",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "82",
+      "nameZh": "残暴之力",
+      "nameEn": "The Brutalizer",
+      "name": "残暴之力",
+      "apiName": "TheBrutalizer",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/thebrutalizer_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1085": {
+      "aramggId": "1085",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "84",
+      "nameZh": "穿针引线",
+      "nameEn": "Thread the Needle",
+      "name": "穿针引线",
+      "apiName": "ThreadtheNeedle",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/threadtheneedle_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1086": {
+      "aramggId": "1086",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "35",
+      "nameZh": "感受燃烧",
+      "nameEn": "Feel the Burn",
+      "name": "感受燃烧",
+      "apiName": "FeeltheBurn",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/feeltheburn_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1087": {
+      "aramggId": "1087",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "28",
+      "nameZh": "侵蚀",
+      "nameEn": "Erosion",
+      "name": "侵蚀",
+      "apiName": "Erosion",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/erosion_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1088": {
+      "aramggId": "1088",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "87",
+      "nameZh": "台风",
+      "nameEn": "Typhoon",
+      "name": "台风",
+      "apiName": "Typhoon",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/typhoon_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1092": {
+      "aramggId": "1092",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "92",
+      "nameZh": "易损",
+      "nameEn": "Vulnerability",
+      "name": "易损",
+      "apiName": "Vulnerability",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/vulnerability_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1095": {
+      "aramggId": "1095",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "26",
+      "nameZh": "唯快不破",
+      "nameEn": "Don't Blink",
+      "name": "唯快不破",
+      "apiName": "DontBlink",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dontblink_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1097": {
+      "aramggId": "1097",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "9",
+      "nameZh": "霸符兄弟",
+      "nameEn": "Buff Buddies",
+      "name": "霸符兄弟",
+      "apiName": "BuffBuddies",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/buffbuddies_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1103": {
+      "aramggId": "1103",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "4",
+      "nameZh": "回归基本功",
+      "nameEn": "Back To Basics",
+      "name": "回归基本功",
+      "apiName": "BacktoBasics",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/backtobasics_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1104": {
+      "aramggId": "1104",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "98",
+      "nameZh": "急急小子",
+      "nameEn": "With Haste",
+      "name": "急急小子",
+      "apiName": "WithHaste",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/withhaste_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1107": {
+      "aramggId": "1107",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "2",
+      "nameZh": "尖端发明家",
+      "nameEn": "Apex Inventor",
+      "name": "尖端发明家",
+      "apiName": "ApexInventor",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/apexinventor_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1108": {
+      "aramggId": "1108",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "26",
+      "nameZh": "唯快不破",
+      "nameEn": "Don't Blink",
+      "name": "唯快不破",
+      "apiName": "DontBlink",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dontblink_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1112": {
+      "aramggId": "1112",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "4",
+      "nameZh": "回归基本功",
+      "nameEn": "Back To Basics",
+      "name": "回归基本功",
+      "apiName": "BacktoBasics",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/backtobasics_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1113": {
+      "aramggId": "1113",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "112",
+      "nameZh": "终极不可阻挡",
+      "nameEn": "Ultimate Unstoppable",
+      "name": "终极不可阻挡",
+      "apiName": "UltimateUnstoppable",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/ultimateunstoppable_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1115": {
+      "aramggId": "1115",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "26",
+      "nameZh": "唯快不破",
+      "nameEn": "Don't Blink",
+      "name": "唯快不破",
+      "apiName": "DontBlink",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dontblink_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1118": {
+      "aramggId": "1118",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "35",
+      "nameZh": "感受燃烧",
+      "nameEn": "Feel the Burn",
+      "name": "感受燃烧",
+      "apiName": "FeeltheBurn",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/feeltheburn_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1129": {
+      "aramggId": "1129",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "118",
+      "nameZh": "会心治疗",
+      "nameEn": "Critical Healing",
+      "name": "会心治疗",
+      "apiName": "CriticalHealing",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/criticalhealing_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1133": {
+      "aramggId": "1133",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "129",
+      "nameZh": "神射法师",
+      "nameEn": "Marksmage",
+      "name": "神射法师",
+      "apiName": "Marksmage",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/marksmage_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1134": {
+      "aramggId": "1134",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "4",
+      "nameZh": "回归基本功",
+      "nameEn": "Back To Basics",
+      "name": "回归基本功",
+      "apiName": "BacktoBasics",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/backtobasics_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1136": {
+      "aramggId": "1136",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "13",
+      "nameZh": "星界躯体",
+      "nameEn": "Celestial Body",
+      "name": "星界躯体",
+      "apiName": "CelestialBody",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/celestialbody_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1138": {
+      "aramggId": "1138",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "2",
+      "nameZh": "尖端发明家",
+      "nameEn": "Apex Inventor",
+      "name": "尖端发明家",
+      "apiName": "ApexInventor",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/apexinventor_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1141": {
+      "aramggId": "1141",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "138",
+      "nameZh": "渴血",
+      "nameEn": "Goredrink",
+      "name": "渴血",
+      "apiName": "Goredrink",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/goredrink_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1149": {
+      "aramggId": "1149",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "4",
+      "nameZh": "回归基本功",
+      "nameEn": "Back To Basics",
+      "name": "回归基本功",
+      "apiName": "BacktoBasics",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/backtobasics_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1150": {
+      "aramggId": "1150",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "26",
+      "nameZh": "唯快不破",
+      "nameEn": "Don't Blink",
+      "name": "唯快不破",
+      "apiName": "DontBlink",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dontblink_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1151": {
+      "aramggId": "1151",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "150",
+      "nameZh": "面包和果酱",
+      "nameEn": "Bread And Jam",
+      "name": "面包和果酱",
+      "apiName": "BreadAndJam",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/breadandjam_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1152": {
+      "aramggId": "1152",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "20",
+      "nameZh": "黎明使者的坚决",
+      "nameEn": "Dawnbringer's Resolve",
+      "name": "黎明使者的坚决",
+      "apiName": "DawnbringersResolve",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1156": {
+      "aramggId": "1156",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "25",
+      "nameZh": "俯冲轰炸",
+      "nameEn": "Dive Bomber",
+      "name": "俯冲轰炸",
+      "apiName": "DiveBomber",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/divebomber_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1170": {
+      "aramggId": "1170",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "53",
+      "nameZh": "科学狂人",
+      "nameEn": "Mad Scientist",
+      "name": "科学狂人",
+      "apiName": "MadScientist",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/madscientist_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1180": {
+      "aramggId": "1180",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "28",
+      "nameZh": "侵蚀",
+      "nameEn": "Erosion",
+      "name": "侵蚀",
+      "apiName": "Erosion",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/erosion_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1181": {
+      "aramggId": "1181",
       "confidence": "high",
       "score": 390,
       "cdragonId": "28",
@@ -126,6 +1526,106 @@
         "iconKey"
       ],
       "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1198": {
+      "aramggId": "1198",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "4",
+      "nameZh": "回归基本功",
+      "nameEn": "Back To Basics",
+      "name": "回归基本功",
+      "apiName": "BacktoBasics",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/backtobasics_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1205": {
+      "aramggId": "1205",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "204",
+      "nameZh": "叠角龙",
+      "nameEn": "Stackosaurus Rex",
+      "name": "叠角龙",
+      "apiName": "StackosaurusRex",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stackosaurusrex_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1206": {
+      "aramggId": "1206",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "205",
+      "nameZh": "物理转魔法",
+      "nameEn": "ADAPt",
+      "name": "物理转魔法",
+      "apiName": "ADAPt",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/adapt_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1211": {
+      "aramggId": "1211",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "206",
+      "nameZh": "魔法转物理",
+      "nameEn": "escAPADe",
+      "name": "魔法转物理",
+      "apiName": "escAPADe",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/escapade_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1214": {
+      "aramggId": "1214",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "53",
+      "nameZh": "科学狂人",
+      "nameEn": "Mad Scientist",
+      "name": "科学狂人",
+      "apiName": "MadScientist",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/madscientist_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
       "evidenceType": "inline-script"
     },
     "1220": {
@@ -168,8 +1668,284 @@
       "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
       "evidenceType": "inline-script"
     },
+    "1237": {
+      "aramggId": "1237",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "4",
+      "nameZh": "回归基本功",
+      "nameEn": "Back To Basics",
+      "name": "回归基本功",
+      "apiName": "BacktoBasics",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/backtobasics_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
     "1238": {
       "aramggId": "1238",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "20",
+      "nameZh": "黎明使者的坚决",
+      "nameEn": "Dawnbringer's Resolve",
+      "name": "黎明使者的坚决",
+      "apiName": "DawnbringersResolve",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1250": {
+      "aramggId": "1250",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "9",
+      "nameZh": "霸符兄弟",
+      "nameEn": "Buff Buddies",
+      "name": "霸符兄弟",
+      "apiName": "BuffBuddies",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/buffbuddies_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1301": {
+      "aramggId": "1301",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "13",
+      "nameZh": "星界躯体",
+      "nameEn": "Celestial Body",
+      "name": "星界躯体",
+      "apiName": "CelestialBody",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/celestialbody_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1308": {
+      "aramggId": "1308",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "15",
+      "nameZh": "死亡之环",
+      "nameEn": "Circle of Death",
+      "name": "死亡之环",
+      "apiName": "CircleofDeath",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/circleofdeath_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1310": {
+      "aramggId": "1310",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "20",
+      "nameZh": "黎明使者的坚决",
+      "nameEn": "Dawnbringer's Resolve",
+      "name": "黎明使者的坚决",
+      "apiName": "DawnbringersResolve",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1311": {
+      "aramggId": "1311",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "46",
+      "nameZh": "炼狱龙魂",
+      "nameEn": "Infernal Soul",
+      "name": "炼狱龙魂",
+      "apiName": "InfernalSoul",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/infernalsoul_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1314": {
+      "aramggId": "1314",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "205",
+      "nameZh": "物理转魔法",
+      "nameEn": "ADAPt",
+      "name": "物理转魔法",
+      "apiName": "ADAPt",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/adapt_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1315": {
+      "aramggId": "1315",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "4",
+      "nameZh": "回归基本功",
+      "nameEn": "Back To Basics",
+      "name": "回归基本功",
+      "apiName": "BacktoBasics",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/backtobasics_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1316": {
+      "aramggId": "1316",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "25",
+      "nameZh": "俯冲轰炸",
+      "nameEn": "Dive Bomber",
+      "name": "俯冲轰炸",
+      "apiName": "DiveBomber",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/divebomber_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1318": {
+      "aramggId": "1318",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments",
+      "evidenceType": "html"
+    },
+    "1319": {
+      "aramggId": "1319",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments",
+      "evidenceType": "html"
+    },
+    "1320": {
+      "aramggId": "1320",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-185",
+      "evidenceType": "inline-script"
+    },
+    "1321": {
+      "aramggId": "1321",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "15",
+      "nameZh": "死亡之环",
+      "nameEn": "Circle of Death",
+      "name": "死亡之环",
+      "apiName": "CircleofDeath",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/circleofdeath_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1322": {
+      "aramggId": "1322",
       "confidence": "high",
       "score": 390,
       "cdragonId": "26",
@@ -188,16 +1964,113 @@
       "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
       "evidenceType": "inline-script"
     },
-    "1346": {
-      "aramggId": "1346",
+    "1323": {
+      "aramggId": "1323",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments",
+      "evidenceType": "html"
+    },
+    "1324": {
+      "aramggId": "1324",
       "confidence": "high",
       "score": 390,
-      "cdragonId": "118",
-      "nameZh": "会心治疗",
-      "nameEn": "Critical Healing",
-      "name": "会心治疗",
-      "apiName": "CriticalHealing",
-      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/criticalhealing_large.png",
+      "cdragonId": "15",
+      "nameZh": "死亡之环",
+      "nameEn": "Circle of Death",
+      "name": "死亡之环",
+      "apiName": "CircleofDeath",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/circleofdeath_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1326": {
+      "aramggId": "1326",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments",
+      "evidenceType": "html"
+    },
+    "1327": {
+      "aramggId": "1327",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "25",
+      "nameZh": "俯冲轰炸",
+      "nameEn": "Dive Bomber",
+      "name": "俯冲轰炸",
+      "apiName": "DiveBomber",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/divebomber_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1328": {
+      "aramggId": "1328",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1330": {
+      "aramggId": "1330",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "129",
+      "nameZh": "神射法师",
+      "nameEn": "Marksmage",
+      "name": "神射法师",
+      "apiName": "Marksmage",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/marksmage_large.png",
       "rarity": "1",
       "hitKinds": [
         "nameZh",
@@ -205,7 +2078,264 @@
         "apiName",
         "iconKey"
       ],
-      "evidenceUrl": "https://aramgg.com/zh-CN/champion-stats/157#inline-script-29",
+      "evidenceUrl": "https://aramgg.com/zh-CN/champion-stats/104#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1331": {
+      "aramggId": "1331",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "4",
+      "nameZh": "回归基本功",
+      "nameEn": "Back To Basics",
+      "name": "回归基本功",
+      "apiName": "BacktoBasics",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/backtobasics_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1332": {
+      "aramggId": "1332",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "42",
+      "nameZh": "恶趣味",
+      "nameEn": "Guilty Pleasure",
+      "name": "恶趣味",
+      "apiName": "GuiltyPleasure",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/guiltypleasure_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1334": {
+      "aramggId": "1334",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "4",
+      "nameZh": "回归基本功",
+      "nameEn": "Back To Basics",
+      "name": "回归基本功",
+      "apiName": "BacktoBasics",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/backtobasics_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1336": {
+      "aramggId": "1336",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "25",
+      "nameZh": "俯冲轰炸",
+      "nameEn": "Dive Bomber",
+      "name": "俯冲轰炸",
+      "apiName": "DiveBomber",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/divebomber_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1338": {
+      "aramggId": "1338",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-237",
+      "evidenceType": "inline-script"
+    },
+    "1339": {
+      "aramggId": "1339",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "23",
+      "nameZh": "魔鬼之舞",
+      "nameEn": "Demon's Dance",
+      "name": "魔鬼之舞",
+      "apiName": "DemonsDance",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/demonsdance_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1340": {
+      "aramggId": "1340",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "46",
+      "nameZh": "炼狱龙魂",
+      "nameEn": "Infernal Soul",
+      "name": "炼狱龙魂",
+      "apiName": "InfernalSoul",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/infernalsoul_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1341": {
+      "aramggId": "1341",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments",
+      "evidenceType": "html"
+    },
+    "1342": {
+      "aramggId": "1342",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1344": {
+      "aramggId": "1344",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "23",
+      "nameZh": "魔鬼之舞",
+      "nameEn": "Demon's Dance",
+      "name": "魔鬼之舞",
+      "apiName": "DemonsDance",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/demonsdance_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1345": {
+      "aramggId": "1345",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "4",
+      "nameZh": "回归基本功",
+      "nameEn": "Back To Basics",
+      "name": "回归基本功",
+      "apiName": "BacktoBasics",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/backtobasics_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1346": {
+      "aramggId": "1346",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/champion-stats/24#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1353": {
+      "aramggId": "1353",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "45",
+      "nameZh": "炼狱导管",
+      "nameEn": "Infernal Conduit",
+      "name": "炼狱导管",
+      "apiName": "InfernalConduit",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/infernalconduit_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
       "evidenceType": "inline-script"
     },
     "1356": {
@@ -228,6 +2358,479 @@
       "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
       "evidenceType": "inline-script"
     },
+    "1358": {
+      "aramggId": "1358",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments",
+      "evidenceType": "html"
+    },
+    "1361": {
+      "aramggId": "1361",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "23",
+      "nameZh": "魔鬼之舞",
+      "nameEn": "Demon's Dance",
+      "name": "魔鬼之舞",
+      "apiName": "DemonsDance",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/demonsdance_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1372": {
+      "aramggId": "1372",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments",
+      "evidenceType": "html"
+    },
+    "1373": {
+      "aramggId": "1373",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "6",
+      "nameZh": "利刃华尔兹",
+      "nameEn": "Blade Waltz",
+      "name": "利刃华尔兹",
+      "apiName": "BladeWaltz",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/bladewaltz_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1375": {
+      "aramggId": "1375",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/champion-stats/875",
+      "evidenceType": "html"
+    },
+    "1384": {
+      "aramggId": "1384",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "26",
+      "nameZh": "唯快不破",
+      "nameEn": "Don't Blink",
+      "name": "唯快不破",
+      "apiName": "DontBlink",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dontblink_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1390": {
+      "aramggId": "1390",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "26",
+      "nameZh": "唯快不破",
+      "nameEn": "Don't Blink",
+      "name": "唯快不破",
+      "apiName": "DontBlink",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dontblink_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1391": {
+      "aramggId": "1391",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "6",
+      "nameZh": "利刃华尔兹",
+      "nameEn": "Blade Waltz",
+      "name": "利刃华尔兹",
+      "apiName": "BladeWaltz",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/bladewaltz_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1400": {
+      "aramggId": "1400",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "25",
+      "nameZh": "俯冲轰炸",
+      "nameEn": "Dive Bomber",
+      "name": "俯冲轰炸",
+      "apiName": "DiveBomber",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/divebomber_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1403": {
+      "aramggId": "1403",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "20",
+      "nameZh": "黎明使者的坚决",
+      "nameEn": "Dawnbringer's Resolve",
+      "name": "黎明使者的坚决",
+      "apiName": "DawnbringersResolve",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1405": {
+      "aramggId": "1405",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1406": {
+      "aramggId": "1406",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1409": {
+      "aramggId": "1409",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "15",
+      "nameZh": "死亡之环",
+      "nameEn": "Circle of Death",
+      "name": "死亡之环",
+      "apiName": "CircleofDeath",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/circleofdeath_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1411": {
+      "aramggId": "1411",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "20",
+      "nameZh": "黎明使者的坚决",
+      "nameEn": "Dawnbringer's Resolve",
+      "name": "黎明使者的坚决",
+      "apiName": "DawnbringersResolve",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+      "rarity": "1",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1415": {
+      "aramggId": "1415",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "208",
+      "nameZh": "轨道镭射",
+      "nameEn": "Orbital Laser",
+      "name": "轨道镭射",
+      "apiName": "OrbitalLaser",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/orbitallaser_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1418": {
+      "aramggId": "1418",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "46",
+      "nameZh": "炼狱龙魂",
+      "nameEn": "Infernal Soul",
+      "name": "炼狱龙魂",
+      "apiName": "InfernalSoul",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/infernalsoul_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments#inline-script-277",
+      "evidenceType": "inline-script"
+    },
+    "1420": {
+      "aramggId": "1420",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "28",
+      "nameZh": "侵蚀",
+      "nameEn": "Erosion",
+      "name": "侵蚀",
+      "apiName": "Erosion",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/erosion_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "1996": {
+      "aramggId": "1996",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/champion-stats/164#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "2002": {
+      "aramggId": "2002",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "4",
+      "nameZh": "回归基本功",
+      "nameEn": "Back To Basics",
+      "name": "回归基本功",
+      "apiName": "BacktoBasics",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/backtobasics_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "2004": {
+      "aramggId": "2004",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments",
+      "evidenceType": "html"
+    },
+    "2005": {
+      "aramggId": "2005",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "25",
+      "nameZh": "俯冲轰炸",
+      "nameEn": "Dive Bomber",
+      "name": "俯冲轰炸",
+      "apiName": "DiveBomber",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/divebomber_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
+      "evidenceType": "inline-script"
+    },
+    "2006": {
+      "aramggId": "2006",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments",
+      "evidenceType": "html"
+    },
+    "2008": {
+      "aramggId": "2008",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments",
+      "evidenceType": "html"
+    },
+    "2009": {
+      "aramggId": "2009",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "58",
+      "nameZh": "秘术冲拳",
+      "nameEn": "Mystic Punch",
+      "name": "秘术冲拳",
+      "apiName": "MysticPunch",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/mysticpunch_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/champion-stats/5#inline-script-33",
+      "evidenceType": "inline-script"
+    },
     "2010": {
       "aramggId": "2010",
       "confidence": "high",
@@ -247,6 +2850,45 @@
       ],
       "evidenceUrl": "https://aramgg.com/zh-CN#inline-script-33",
       "evidenceType": "inline-script"
+    },
+    "2024": {
+      "aramggId": "2024",
+      "confidence": "high",
+      "score": 290,
+      "cdragonId": "226",
+      "nameZh": "属性！",
+      "nameEn": "Stats!",
+      "name": "属性！",
+      "apiName": "Stats",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/stats_large.png",
+      "rarity": "",
+      "hitKinds": [
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN/augments",
+      "evidenceType": "html"
+    },
+    "2026": {
+      "aramggId": "2026",
+      "confidence": "high",
+      "score": 390,
+      "cdragonId": "35",
+      "nameZh": "感受燃烧",
+      "nameEn": "Feel the Burn",
+      "name": "感受燃烧",
+      "apiName": "FeeltheBurn",
+      "icon": "https://raw.communitydragon.org/16.11/game/assets/ux/cherry/augments/icons/feeltheburn_large.png",
+      "rarity": "2",
+      "hitKinds": [
+        "nameZh",
+        "nameEn",
+        "apiName",
+        "iconKey"
+      ],
+      "evidenceUrl": "https://aramgg.com/zh-CN",
+      "evidenceType": "html"
     }
   },
   "skipped": {},
