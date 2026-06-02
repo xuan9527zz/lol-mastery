@@ -6,18 +6,10 @@ const BASE = "https://aramgg.com";
 const LANG = "zh-CN";
 const OUT_PATH = path.join("data", "aramgg-id-map-detection.json");
 const CDRAGON_PATH = path.join("data", "cdragon-arena-augments.json");
+const ARAMGG_AUGMENTS_PATH = path.join("data", "aramgg-augments.json");
 
-const TARGET_IDS = (process.env.ARAMGG_TARGET_IDS || "1225,1220,2010,1346,1073,1238,1195,1356,1081,1052,1051,1071")
-  .split(",")
-  .map((id) => id.trim())
-  .filter(Boolean);
-
-const SAMPLE_CHAMPION_KEYS = (process.env.ARAMGG_SAMPLE_CHAMPIONS || "22,222,1,103,157,51,145,81,64")
-  .split(",")
-  .map((id) => id.trim())
-  .filter(Boolean);
-
-const MAX_SCRIPT_FILES = Number(process.env.MAX_SCRIPT_FILES || 120);
+const MAX_SCRIPT_FILES = Number(process.env.MAX_SCRIPT_FILES || 200);
+const MAX_TARGET_IDS = Number(process.env.MAX_TARGET_IDS || 9999);
 
 function normalizeText(text = "") {
   return String(text).replace(/\s+/g, " ").trim();
@@ -63,6 +55,31 @@ async function fetchText(url) {
   return await response.text();
 }
 
+async function readJson(filePath) {
+  const raw = await readFile(filePath, "utf8");
+  return JSON.parse(raw);
+}
+
+async function collectAllTargetIds() {
+  const data = await readJson(ARAMGG_AUGMENTS_PATH);
+  const ids = new Set();
+  const championKeys = new Set();
+
+  for (const [championKey, champion] of Object.entries(data.champions || {})) {
+    championKeys.add(championKey);
+
+    for (const augment of champion.augments || []) {
+      const id = String(augment.augmentId || "").replace("#", "").trim();
+      if (/^\d{3,5}$/.test(id)) ids.add(id);
+    }
+  }
+
+  return {
+    targetIds: [...ids].slice(0, MAX_TARGET_IDS),
+    championKeys: [...championKeys],
+  };
+}
+
 async function loadCdragonHints() {
   try {
     const raw = await readFile(CDRAGON_PATH, "utf8");
@@ -100,7 +117,7 @@ async function loadCdragonHints() {
   }
 }
 
-function collectScriptUrls(html, pageUrl) {
+function collectScriptUrls(html) {
   const $ = cheerio.load(html);
   const urls = new Set();
 
@@ -116,7 +133,6 @@ function collectScriptUrls(html, pageUrl) {
     }
   });
 
-  // Next.js manifests/chunks often appear inside HTML text.
   const regexes = [
     /"([^"]+?\.js)"/g,
     /'([^']+?\.js)'/g,
@@ -169,10 +185,11 @@ function snippetsAroundTargets(text, url, type, targetIds) {
   for (const id of targetIds) {
     const regex = new RegExp(`(?<!\\d)#?${escapeRegex(id)}(?!\\d)`, "g");
     let match;
+    let countForId = 0;
 
     while ((match = regex.exec(text))) {
-      const start = Math.max(0, match.index - 600);
-      const end = Math.min(text.length, match.index + 600);
+      const start = Math.max(0, match.index - 700);
+      const end = Math.min(text.length, match.index + 700);
       const snippet = text.slice(start, end);
 
       results.push({
@@ -183,9 +200,8 @@ function snippetsAroundTargets(text, url, type, targetIds) {
         snippet: normalizeText(snippet),
       });
 
-      if (results.filter((item) => item.aramggId === id && item.url === url).length >= 20) {
-        break;
-      }
+      countForId += 1;
+      if (countForId >= 25) break;
     }
   }
 
@@ -235,26 +251,6 @@ function scoreSnippet(snippet, cdragonHints) {
 
   matches.sort((a, b) => b.score - a.score);
   return matches.slice(0, 5);
-}
-
-function extractPossibleObjects(snippetText, aramggId) {
-  const findings = [];
-
-  // Loose object-ish substrings containing target id.
-  const patterns = [
-    new RegExp(`\\{[^{}]{0,500}(?:#?${escapeRegex(aramggId)})[^{}]{0,500}\\}`, "g"),
-    new RegExp(`\\[[^\\[\\]]{0,500}(?:#?${escapeRegex(aramggId)})[^\\[\\]]{0,500}\\]`, "g"),
-  ];
-
-  for (const pattern of patterns) {
-    let match;
-    while ((match = pattern.exec(snippetText))) {
-      findings.push(normalizeText(match[0]).slice(0, 1000));
-      if (findings.length >= 5) break;
-    }
-  }
-
-  return findings;
 }
 
 function buildLikelyMap(scoredSnippets) {
@@ -315,11 +311,12 @@ function buildLikelyMap(scoredSnippets) {
 
 async function main() {
   const cdragon = await loadCdragonHints();
+  const { targetIds, championKeys } = await collectAllTargetIds();
 
   const pageUrls = [
     `${BASE}/${LANG}`,
     `${BASE}/${LANG}/augments`,
-    ...SAMPLE_CHAMPION_KEYS.map((key) => `${BASE}/${LANG}/champion-stats/${key}`),
+    ...championKeys.map((key) => `${BASE}/${LANG}/champion-stats/${key}`),
   ];
 
   const pages = [];
@@ -337,13 +334,11 @@ async function main() {
         length: html.length,
       });
 
-      for (const scriptUrl of collectScriptUrls(html, url)) {
+      for (const scriptUrl of collectScriptUrls(html)) {
         scriptUrls.add(scriptUrl);
       }
 
       inlineChunks.push(...collectInlineData(html, url));
-
-      // Also scan page HTML itself.
       inlineChunks.push({
         url,
         type: "html",
@@ -383,24 +378,22 @@ async function main() {
 
   const rawSnippets = [];
   for (const chunk of allChunks) {
-    rawSnippets.push(...snippetsAroundTargets(chunk.text, chunk.url, chunk.type, TARGET_IDS));
+    rawSnippets.push(...snippetsAroundTargets(chunk.text, chunk.url, chunk.type, targetIds));
   }
 
   const scoredSnippets = rawSnippets.map((snippet) => {
     const matches = cdragon.loaded ? scoreSnippet(snippet, cdragon.hints) : [];
-    const possibleObjects = extractPossibleObjects(snippet.snippet, snippet.aramggId);
 
     return {
       ...snippet,
       matches,
-      possibleObjects,
     };
   });
 
   const likelyMap = buildLikelyMap(scoredSnippets);
 
   const targetSummary = {};
-  for (const id of TARGET_IDS) {
+  for (const id of targetIds) {
     const snippets = scoredSnippets.filter((item) => item.aramggId === id);
     targetSummary[id] = {
       snippetCount: snippets.length,
@@ -416,8 +409,10 @@ async function main() {
       pages: pageUrls,
     },
     scrapedAt: new Date().toISOString(),
-    targetIds: TARGET_IDS,
-    sampleChampionKeys: SAMPLE_CHAMPION_KEYS,
+    targetIds,
+    targetIdCount: targetIds.length,
+    championKeys,
+    championKeyCount: championKeys.length,
     cdragon: {
       loaded: cdragon.loaded,
       count: cdragon.count,
@@ -431,13 +426,15 @@ async function main() {
       totalChunksScanned: allChunks.length,
       rawSnippetCount: rawSnippets.length,
       matchedSnippetCount: scoredSnippets.filter((item) => item.matches?.length).length,
+      highConfidenceCount: Object.values(likelyMap).filter((item) => item.confidence === "high").length,
+      mediumConfidenceCount: Object.values(likelyMap).filter((item) => item.confidence === "medium").length,
+      lowConfidenceCount: Object.values(likelyMap).filter((item) => item.confidence === "low").length,
     },
     targetSummary,
     likelyMap,
     scoredSnippets: scoredSnippets
       .sort((a, b) => (b.matches?.[0]?.score || 0) - (a.matches?.[0]?.score || 0))
-      .slice(0, 300),
-    rawSnippets: rawSnippets.slice(0, 300),
+      .slice(0, 500),
     pages,
     scriptsFetched: scriptChunks.map((item) => ({
       url: item.url,
@@ -445,17 +442,23 @@ async function main() {
     })),
     fetchErrors,
     note:
-      "This is a diagnostic file. If likelyMap has high-confidence entries, we can build an aramggId -> CommunityDragon augment bridge. If not, aramgg likely does not expose the mapping in HTML/JS fetched by static requests.",
+      "Full diagnostic file. Target ids are collected from data/aramgg-augments.json instead of a small fixed list.",
   };
 
   await mkdir(path.dirname(OUT_PATH), { recursive: true });
   await writeFile(OUT_PATH, JSON.stringify(payload, null, 2), "utf8");
 
   console.log(`Saved ${OUT_PATH}`);
+  console.log(`Target ids: ${payload.targetIdCount}`);
   console.log(`Raw snippets: ${payload.stats.rawSnippetCount}`);
   console.log(`Matched snippets: ${payload.stats.matchedSnippetCount}`);
-  console.log(`Script URLs discovered: ${payload.stats.scriptUrlsDiscovered}`);
-  console.log(`Scripts fetched: ${payload.stats.scriptsFetched}`);
+  console.log(`High confidence: ${payload.stats.highConfidenceCount}`);
+  console.log(`Medium confidence: ${payload.stats.mediumConfidenceCount}`);
+  console.log(`Low confidence: ${payload.stats.lowConfidenceCount}`);
+
+  if (targetIds.length === 0) {
+    throw new Error("No target ids found in data/aramgg-augments.json.");
+  }
 }
 
 main().catch((error) => {
