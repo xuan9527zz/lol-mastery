@@ -98,6 +98,7 @@
       const [importText, setImportText] = useState("");
       const [aramData, setAramData] = useState(null);
       const [cdragonData, setCdragonData] = useState(null);
+      const [aramBridgeData, setAramBridgeData] = useState(null);
       const [aramLoadError, setAramLoadError] = useState("");
       const [selectedChampion, setSelectedChampion] = useState(null);
       const [masteryLevels, setMasteryLevels] = useState(readInitialMasteryLevels);
@@ -180,6 +181,18 @@
           .catch(() => {
             setCdragonData(null);
           });
+
+        fetch("data/aramgg-id-bridge.json", { cache: "no-store" })
+          .then((response) => {
+            if (!response.ok) throw new Error("No aramgg bridge data");
+            return response.json();
+          })
+          .then((data) => {
+            setAramBridgeData(data);
+          })
+          .catch(() => {
+            setAramBridgeData(null);
+          });
       }, []);
 
       const selectedAram = useMemo(() => {
@@ -189,7 +202,10 @@
 
       function getAugmentInfo(augment) {
         const id = String(augment?.augmentId || "").replace("#", "");
-        const info = cdragonData?.byId?.[id] || null;
+        const bridgeInfo = aramBridgeData?.byAramggId?.[id] || null;
+        const cdragonInfo = bridgeInfo?.cdragonId ? cdragonData?.byId?.[bridgeInfo.cdragonId] : null;
+        const directInfo = cdragonData?.byId?.[id] || null;
+        const info = bridgeInfo || cdragonInfo || directInfo || null;
 
         return {
           id,
@@ -197,6 +213,8 @@
           nameEn: info?.nameEn || "",
           icon: info?.icon || "",
           rarity: info?.rarity || augment?.tier || "",
+          confidence: bridgeInfo?.confidence || "",
+          cdragonId: bridgeInfo?.cdragonId || directInfo?.id || "",
         };
       }
 
@@ -460,6 +478,7 @@
                     <div className="mb-3 text-sm text-slate-300">
                       数据来源：aramgg.com；抓取时间：{aramData.scrapedAt ? new Date(aramData.scrapedAt).toLocaleString() : "未知"}。
                       {cdragonData ? ` 海克斯图标：CommunityDragon ${cdragonData.augmentIconCount || 0} 个。` : " 正在加载海克斯图标字典。"}
+                      {aramBridgeData ? ` 编号映射：${aramBridgeData.mappedCount || 0} 个。` : " 编号映射尚未加载。"}
                     </div>
                     <div className="overflow-x-auto rounded-2xl border border-white/10">
                       <table className="w-full min-w-[640px] text-left text-sm">
@@ -496,7 +515,8 @@
                                       <div>
                                         <div className="font-semibold text-slate-50">{info.name}</div>
                                         {info.nameEn && <div className="text-xs text-slate-400">{info.nameEn}</div>}
-                                        <div className="text-xs text-slate-500">ID: {info.id}</div>
+                                        <div className="text-xs text-slate-500">ARAMGG ID: {info.id}{info.cdragonId ? ` / CDragon ID: ${info.cdragonId}` : ""}</div>
+                                        {info.confidence && <div className="text-xs text-emerald-300">匹配可信度：{info.confidence}</div>}
                                       </div>
                                     </div>
                                   );
